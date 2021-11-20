@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% for tutor in tutors %}
+        <p><img src="{{ tutor.tutor_photo.url }}" alt="pam param" height="110px" width="110px"></p>
+        <p>{{ tutor.tutor_name }}</p>
+        <p>{{ tutor.tutor_info }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}
