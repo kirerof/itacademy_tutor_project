@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Tutor(models.Model):
@@ -10,3 +11,12 @@ class Tutor(models.Model):
 
     def __str__(self):
         return self.tutor_name
+
+    def get_absolute_url(self):
+        return reverse('reception:create_reception',
+                       args=[self.slug])
+
+
+class Reception(models.Model):
+    reception_date_time = models.DateTimeField(verbose_name='дата приема')
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)

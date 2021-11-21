@@ -5,6 +5,7 @@
         <p><img src="{{ tutor.tutor_photo.url }}" alt="pam param" height="110px" width="110px"></p>
         <p>{{ tutor.tutor_name }}</p>
         <p>{{ tutor.tutor_info }}</p>
+        <a href="{{ tutor.get_absolute_url }}">записаться</a>
         <hr>
     {% endfor %}
 {% endblock %}
