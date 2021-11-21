@@ -16,7 +16,19 @@ class Tutor(models.Model):
         return reverse('reception:create_reception',
                        args=[self.slug])
 
+    def get_create_feedback_url(self):
+        return reverse('reception:create_feedback', args=[self.slug])
+
+    def get_see_feedback_url(self):
+        return reverse('reception:see_feedback', args=[self.slug])
+
 
 class Reception(models.Model):
     reception_date_time = models.DateTimeField(verbose_name='дата приема')
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
+
+
+class Feedback(models.Model):
+    feedback_text = models.TextField(verbose_name='написать отзыв')
+    created = models.DateTimeField(auto_now_add=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)

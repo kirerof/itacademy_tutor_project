@@ -5,7 +5,9 @@
         <p><img src="{{ tutor.tutor_photo.url }}" alt="pam param" height="110px" width="110px"></p>
         <p>{{ tutor.tutor_name }}</p>
         <p>{{ tutor.tutor_info }}</p>
-        <a href="{{ tutor.get_absolute_url }}">записаться</a>
+        <a href="{{ tutor.get_absolute_url }}">записаться</a><br>
+        <a href="{{ tutor.get_see_feedback_url }}">Отзывы</a>
+        <a href="{{ tutor.get_create_feedback_url }}">Оставить отзыв</a>
         <hr>
     {% endfor %}
 {% endblock %}

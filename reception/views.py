@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
 from . import forms
 from . import models
@@ -38,3 +39,30 @@ def create_reception(request, slug):
     return render(request, 'reception/tutor_reception.html',
                   {'tutor': tutor1,
                    'reception_form': reception_form})
+
+
+def create_feedback(request, slug):
+    tutor = get_object_or_404(models.Tutor, slug=slug)
+
+    if request.method == "POST":
+        feedback_form = forms.CreateFeedbackForm(request.POST)
+        if feedback_form.is_valid():
+            new_feedback = feedback_form.save(commit=False)
+            new_feedback.tutor = tutor
+            new_feedback.save()
+
+            return redirect('reception:see_feedback', slug)
+    else:
+        feedback_form = forms.CreateFeedbackForm()
+
+    return render(request, 'tutor/create_feedback.html',
+                  {'feedback_form': feedback_form,
+                   'tutor': tutor})
+
+
+def see_feedback(request, slug):
+    tutor = get_object_or_404(models.Tutor, slug=slug)
+    tutor_feedback = models.Feedback.objects.filter(tutor=tutor.id)
+
+    return render(request, 'tutor/see_feedback.html',
+                  {'tutor_feedback': tutor_feedback, 'tutor': tutor})

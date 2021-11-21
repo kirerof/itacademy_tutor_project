@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Отзывы о работе {{ tutor.tutor_name }}:</h1>
+    {# for отображает последние 10 комментариев #}
+    {% for feedback in tutor_feedback|dictsortreversed:'created'|slice:'10' %}
+        <p>{{ feedback.feedback_text }}<br>
+        {{ feedback.created|date:'d E yг. в G:i' }}</p>
+        <hr>
+    {% empty %}
+        <p>отзывов пока не было</p>
+    {% endfor %}<br>
+    <a href="{% url 'reception:all_tutor' %}">назад к репетиторам</a>
+{% endblock %}
