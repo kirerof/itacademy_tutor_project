@@ -14,3 +14,9 @@ class MaterialAdmin(admin.ModelAdmin):
     list_display = ('reception_date_time', 'tutor')
     list_filter = ('reception_date_time', 'tutor')
     search_fields = ('reception_date_time', 'tutor')
+
+
+@admin.register(models.Feedback)
+class MaterialAdmin(admin.ModelAdmin):
+    list_display = ('created', 'feedback_text', 'tutor')
+    list_filter = ('tutor', 'created')
