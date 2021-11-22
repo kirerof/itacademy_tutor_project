@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -13,6 +14,7 @@ def all_tutors(request):
                   {'tutors': tutors})
 
 
+@login_required
 def create_reception(request, slug):
     tutor1 = get_object_or_404(models.Tutor, slug=slug)
     if request.method == 'POST':
@@ -41,6 +43,7 @@ def create_reception(request, slug):
                    'reception_form': reception_form})
 
 
+@login_required
 def create_feedback(request, slug):
     tutor = get_object_or_404(models.Tutor, slug=slug)
 
@@ -81,5 +84,5 @@ def registration(request):
     else:
         registration_form = forms.UserRegistrationForm()
 
-    return render(request, 'authenticate/registration.html',
+    return render(request, 'registration/registration.html',
                   {'registration_form': registration_form})

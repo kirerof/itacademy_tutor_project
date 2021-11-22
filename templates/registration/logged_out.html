@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    logout page
+{% endblock %}
+
+{% block body %}
+    <p>Вы вышли из системы</p>
+    <a href="{% url 'reception:all_tutor' %}">Вернуться к репетиторам</a>
+{% endblock %}
