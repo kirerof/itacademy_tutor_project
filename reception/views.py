@@ -66,3 +66,20 @@ def see_feedback(request, slug):
 
     return render(request, 'tutor/see_feedback.html',
                   {'tutor_feedback': tutor_feedback, 'tutor': tutor})
+
+
+def registration(request):
+    if request.method == 'POST':
+        registration_form = forms.UserRegistrationForm(request.POST)
+        if registration_form.is_valid():
+            cd = registration_form.cleaned_data
+            new_user = registration_form.save(commit=False)
+            new_user.set_password(cd['password1'])
+            new_user.save()
+
+            return redirect('reception:all_tutor')
+    else:
+        registration_form = forms.UserRegistrationForm()
+
+    return render(request, 'authenticate/registration.html',
+                  {'registration_form': registration_form})
