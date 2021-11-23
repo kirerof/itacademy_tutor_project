@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -32,3 +33,12 @@ class Feedback(models.Model):
     feedback_text = models.TextField(verbose_name='написать отзыв')
     created = models.DateTimeField(auto_now_add=True)
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    email = models.EmailField()
+    phone = models.CharField(verbose_name='телефон', max_length=13, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.user) + ' profile'

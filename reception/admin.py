@@ -2,6 +2,8 @@ from django.contrib import admin
 from . import models
 
 
+admin.site.register(models.Profile)
+
 @admin.register(models.Tutor)
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ('tutor_name', 'slug', 'tutor_phone', 'tutor_info')

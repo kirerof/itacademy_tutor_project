@@ -12,6 +12,7 @@
 </head>
 <header>
     {% if request.user.is_authenticated %}
+        <a href="{% url 'reception:user_profile' %}">Профиль</a> |
         <a href="{% url 'reception:logout' %}">Выйти</a>
     {% else %}
         <a href="{% url 'reception:login' %}">Войти</a> |

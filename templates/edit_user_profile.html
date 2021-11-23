@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit profile
+{% endblock %}
+
+{% block body %}
+    <h1>Вы можете изменить свои данные:</h1>
+    <form method="post">
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Изменить">
+    </form>
+{% endblock %}

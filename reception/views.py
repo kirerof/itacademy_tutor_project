@@ -79,6 +79,8 @@ def registration(request):
             new_user = registration_form.save(commit=False)
             new_user.set_password(cd['password1'])
             new_user.save()
+            models.Profile.objects.create(user=new_user,
+                                          email=cd['email'])
 
             return redirect('reception:login')
     else:
@@ -86,3 +88,26 @@ def registration(request):
 
     return render(request, 'registration/registration.html',
                   {'registration_form': registration_form})
+
+
+def user_profile(request):
+    return render(request, "profile.html", {'user': request.user})
+
+
+def edit_user_profile(request):
+    if request.method == "POST":
+        user_form = forms.UserEditForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST,
+                                             instance=request.user.profile)
+        if all((user_form.is_valid(), profile_form.is_valid())):
+            user_form.save()
+            profile_form.save()
+
+            return render(request, "profile.html", {'user': request.user})
+    else:
+        user_form = forms.UserEditForm(instance=request.user)
+        profile_form = forms.ProfileEditForm(request.POST,
+                                             instance=request.user.profile)
+
+    return render(request, "edit_user_profile.html", {'user_form': user_form,
+                                                      'profile_form': profile_form})
