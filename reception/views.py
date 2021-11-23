@@ -80,7 +80,7 @@ def registration(request):
             new_user.set_password(cd['password1'])
             new_user.save()
 
-            return redirect('reception:all_tutor')
+            return redirect('reception:login')
     else:
         registration_form = forms.UserRegistrationForm()
 

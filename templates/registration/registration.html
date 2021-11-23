@@ -6,7 +6,7 @@
 
 {% block body %}
     <form action="." method="post">
-        {{ reg_form.as_p }}
+        {{ registration_form.as_p }}
         {% csrf_token %}
         <input type="submit" value="зарегистрироваться">
     </form>

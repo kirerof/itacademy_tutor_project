@@ -14,5 +14,6 @@
             <input type="hidden" name="next" value="{{ next }}">
             <input type="submit" class="btn btn-success btn-sm" value="login">
         </form>
+        <a href="{% url 'reception:password_reset' %}">Забыли пароль?</a>
     {% endif %}
 {% endblock %}
