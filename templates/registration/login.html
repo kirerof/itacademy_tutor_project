@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 
 {% block title %}
     login page
@@ -12,8 +13,9 @@
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            <input type="submit" class="btn btn-success btn-sm" value="login">
+            <input type="submit" class="btn btn-success btn-sm" value="Войти">
         </form>
         <a href="{% url 'reception:password_reset' %}">Забыли пароль?</a>
+        <a href="{% provider_login_url 'google' %}">Войти с помощью Google</a>
     {% endif %}
 {% endblock %}
