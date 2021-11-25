@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    My receptions
+{% endblock %}
+
+{% block body %}<br>
+    {% for reception in receptions %}
+        <div class="container" style="width: 20%; background-color: lightcyan; border: 6px solid lightcyan; border-radius: 40px">
+            <h6 style="margin-top: 10px">{{ reception.tutor }}</h6>
+            <p>{{ reception.reception_date_time|date:'d E yг. в G:i' }}</p>
+        </div><br>
+    {% empty %}
+        <p>Вы еще не записывались на занятия</p>
+    {% endfor %}
+{% endblock %}

@@ -1,1 +1,6 @@
-Успешно
+{% extends 'base.html' %}
+
+{% block body %}
+    <p>Ваша запись была успешно сформирована</p><br>
+    <a href="{% url 'reception:all_tutor' %}">назад к репетиторам</a><br><br>
+{% endblock %}

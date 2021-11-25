@@ -27,6 +27,7 @@ class Tutor(models.Model):
 class Reception(models.Model):
     reception_date_time = models.DateTimeField(verbose_name='дата приема')
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
+    user = models.CharField(max_length=50, blank=True)
 
 
 class Feedback(models.Model):

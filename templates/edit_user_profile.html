@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Вы можете изменить свои данные:</h1>
+    <h3>Вы можете изменить свои данные:</h3>
     <form method="post">
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
         {% csrf_token %}
-        <input type="submit" value="Изменить">
+        <input type="submit" class='btn btn-primary btn-sm' value="Изменить">
     </form>
 {% endblock %}

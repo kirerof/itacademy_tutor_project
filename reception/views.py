@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from . import forms
 from . import models
-from django.http import HttpResponse
+import datetime
 
 
 def all_tutors(request):
@@ -24,11 +25,13 @@ def create_reception(request, slug):
             new_reception = reception_form.save(commit=False)
             new_reception.date = cd['reception_date_time']
             new_reception.tutor = tutor1
+            new_reception.user = request.user
             # условие для предотвращения записи на одно и то же время к одному репетитору
             if models.Reception.objects.filter(reception_date_time=cd['reception_date_time'],
                                                tutor=new_reception.tutor).count() == 0:
                 models.Reception.objects.create(reception_date_time=new_reception.date,
-                                                tutor=new_reception.tutor)
+                                                tutor=new_reception.tutor,
+                                                user=new_reception.user)
 
                 return render(request, 'reception/reception_done.html')
 
@@ -111,3 +114,16 @@ def edit_user_profile(request):
 
     return render(request, "edit_user_profile.html", {'user_form': user_form,
                                                       'profile_form': profile_form})
+
+
+def my_receptions(request):
+    receptions_set = models.Reception.objects.filter(user=request.user).order_by('reception_date_time')
+    receptions = []
+    delta = datetime.timedelta(hours=3)
+    for reception in receptions_set:
+        if reception.reception_date_time > datetime.datetime.now(datetime.timezone.utc) + delta:
+            receptions.append(reception)
+        else:
+            reception.delete()
+
+    return render(request, "reception/my_receptions.html", {'receptions': receptions})

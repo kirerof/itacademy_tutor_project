@@ -1,9 +1,13 @@
+{% load static %}
 {% load bootstrap4 %}
+{% bootstrap_css %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}MY DEFAULT TITLE{% endblock %}</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- XDSoft DateTimePicker -->
@@ -12,14 +16,21 @@
 </head>
 <header>
     {% if request.user.is_authenticated %}
-        <a href="{% url 'reception:user_profile' %}">Профиль</a> |
-        <a href="{% url 'reception:logout' %}">Выйти</a>
+        <nav class="navbar navbar-expand-lg" style="background-color: lightcyan; opacity: .7">
+            <a class="btn btn-outline-primary" style="margin-left: 2%; margin-right: 5px" href="{% url 'reception:all_tutor' %}">Репетиторы</a>
+            <a class="btn btn-outline-primary" href="{% url 'reception:my_receptions' %}">Мои записи</a>
+            <a class="btn btn-outline-primary" style="margin-left: auto; margin-right: 5px" href="{% url 'reception:user_profile' %}">Профиль</a>
+            <a class="btn btn-outline-primary" style="margin-right: 2%" href="{% url 'reception:logout' %}">Выйти</a>
+        </nav>
     {% else %}
-        <a href="{% url 'reception:login' %}">Войти</a> |
-        <a href="{% url 'reception:registration' %}">Регистрация</a>
+        <nav class="navbar navbar-expand-lg" style="background-color: lightcyan; opacity: .7">
+            <a class="btn btn-outline-primary" style="margin-left: 2%" href="{% url 'reception:all_tutor' %}">Репетиторы</a>
+            <a class="btn btn-outline-primary" style="margin-right: 5px; margin-left: auto" href="{% url 'reception:login' %}">Войти</a>
+            <a class="btn btn-outline-primary" style="margin-right: 2%" href="{% url 'reception:registration' %}">Регистрация</a>
+        </nav>
     {% endif %}
 </header>
-<body>
+<body style="text-align: center;">
 {% block body %}{% endblock %}
 </body>
 </html>

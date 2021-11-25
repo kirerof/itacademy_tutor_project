@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block body %}
-    <form action="." method="post">
-        {{ registration_form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="зарегистрироваться">
-    </form>
+    {% if registration_form.errors %}
+        {{ registration_form.errors }}
+        <a href="{% url 'reception:registration' %}">назад</a>
+    {% else %}
+        <form action="." method="post">
+            {{ registration_form.as_p }}
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Зарегистрироваться">
+        </form>
+    {% endif %}
 {% endblock %}

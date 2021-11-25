@@ -16,8 +16,8 @@ class CreateFeedbackForm(forms.ModelForm):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(widget=forms.PasswordInput, label='Пароль')
+    password2 = forms.CharField(widget=forms.PasswordInput, label='Повторите пароль')
 
     class Meta:
         model = User

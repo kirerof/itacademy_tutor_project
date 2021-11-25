@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h3>Имя пользователя: {{ user.username }} </h3>
-    <p>Ваш e-mail: {{ user.email }}</p>
-    <p>Ваш телефон: {{ user.profile.phone }}</p>
-    <a href="{% url "reception:edit_user_profile" %}">Изменить профиль</a><br>
-    <a href="{% url "reception:password_change" %}">Сменить пароль</a><br>
+    <div id="profile">
+        <p><b>Имя пользователя: </b>{{ user.username }}</p>
+        <p><b>Ваш e-mail: </b>{{ user.email }}</p>
+        <p><b>Ваш телефон: </b>{{ user.profile.phone }}</p>
+        <a class="btn btn-outline-info btn-sm" href="{% url "reception:edit_user_profile" %}">Изменить профиль</a>
+        <a class="btn btn-outline-info btn-sm" href="{% url "reception:password_change" %}">Сменить пароль</a>
+    </div>
 {% endblock %}

@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
-{% block body %}
-    {% for tutor in tutors %}
-        <p><img src="{{ tutor.tutor_photo.url }}" alt="pam param" height="110px" width="110px"></p>
-        <p>{{ tutor.tutor_name }}</p>
-        <p>{{ tutor.tutor_info }}</p>
-        <a href="{{ tutor.get_absolute_url }}">записаться</a><br>
-        <a href="{{ tutor.get_see_feedback_url }}">Отзывы</a>
-        <a href="{{ tutor.get_create_feedback_url }}">Оставить отзыв</a>
-        <hr>
-    {% endfor %}
+{% block body %}<br>
+    <div class="d-flex flex-row; container">
+        {% for tutor in tutors %}
+            <div class="card border-success" style="width: 20rem; margin: 10px">
+                <div class="card-body" style="text-align: center">
+                    <p><img src="{{ tutor.tutor_photo.url }}" class="rounded-circle" alt="photo" height="110px" width="110px"></p>
+                    <h5>{{ tutor.tutor_name }}</h5>
+                    <p>{{ tutor.tutor_info }}</p>
+                    <div style="vertical-align: baseline">
+                        <a class="btn btn-primary btn-sm btn-block" href="{{ tutor.get_absolute_url }}">Записаться</a><br>
+                        <a class="btn btn-outline-info btn-sm btn-block" href="{{ tutor.get_see_feedback_url }}">Отзывы</a>
+                        <a class="btn btn-outline-info btn-sm btn-block" href="{{ tutor.get_create_feedback_url }}">Оставить отзыв</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

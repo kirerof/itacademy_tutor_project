@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <form method="post">
-{#        {% for fields in reception_form.fields %}#}
-{#            <div class="popup">#}
-{#                {{ fields.errors }}#}
-{#            </div>#}
-            {{ tutor.tutor_name }}
-            {{ reception_form.reception_date_time }}
+    <form id="picker" method="post" >
+        <div >
+            <h2>{{ tutor.tutor_name }}</h2><br>
+            {{ reception_form.reception_date_time }}<br><br>
             {% csrf_token %}
-            <input type="submit" value="записаться">
-{#         {% endfor %}#}
+            <input class="btn btn-primary" type="submit" value="Записаться">
+        </div>
     </form>
 
     <script>

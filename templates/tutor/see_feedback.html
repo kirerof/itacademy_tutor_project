@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Отзывы о работе {{ tutor.tutor_name }}:</h1>
+    <h3>Отзывы о работе {{ tutor.tutor_name }}:</h3><br>
     {# for отображает последние 10 комментариев #}
     {% for feedback in tutor_feedback|dictsortreversed:'created'|slice:'10' %}
-        <p>{{ feedback.feedback_text }}<br>
-        {{ feedback.created|date:'d E yг. в G:i' }}</p>
-        <hr>
+        <div class="container" style="width: 28%; background-color: lightcyan; border: 6px solid lightcyan; border-radius: 15px 100px 15px 100px">
+            {{ feedback.feedback_text }}<br>
+            <span style="opacity: .5">{{ feedback.created|date:'d E yг. в G:i' }}</span>
+        </div>
+        <br>
     {% empty %}
         <p>отзывов пока не было</p>
-    {% endfor %}<br>
-    <a href="{% url 'reception:all_tutor' %}">назад к репетиторам</a>
+    {% endfor %}
+    {% if request.user.is_authenticated %}
+        <p><a class="btn btn-outline-info btn-sm" href="{{ tutor.get_create_feedback_url }}">Оставить отзыв</a></p>
+        <a class="btn btn-primary" href="{{ tutor.get_absolute_url }}">записаться</a>
+    {% endif %}
 {% endblock %}

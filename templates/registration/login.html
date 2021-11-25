@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load socialaccount %}
 
 {% block title %}
     login page
@@ -7,15 +6,16 @@
 
 {% block body %}
     {% if form.errors %}
-        ОШИБКА (проверьте данные, которые вы вводите)
+        <p>ОШИБКА (проверьте данные, которые вы вводите)</p>
+        <a href="{% url 'reception:login' %}">назад</a>
     {% else %}
         <form action="." method="post">
-            {{ form.as_p }}
+            <table>{{ form.as_p }}</table>
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            <input type="submit" class="btn btn-success btn-sm" value="Войти">
+            <input type="submit" class="btn btn-success btn-sm" value="Войти"><br>
+            <a href="{% url 'reception:password_reset' %}">Забыли пароль?</a>
         </form>
-        <a href="{% url 'reception:password_reset' %}">Забыли пароль?</a>
-        <a href="{% provider_login_url 'google' %}">Войти с помощью Google</a>
+{#        <a href="{% provider_login_url 'google' %}">Войти с помощью Google</a>#}
     {% endif %}
 {% endblock %}
